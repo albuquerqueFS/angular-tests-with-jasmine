@@ -61,3 +61,7 @@ Adicione a dependência instalada ao array de plugins em karma.conf
 Em package.json crie um comando separado com o objetivo de realizar os testes em diversos navegadores.
 
 Exemplo: "test-common": "ng test --browsers Chrome,Firefox",
+
+### Para rodar no modo headless
+
+"test-ci": "ng test --browsers ChromeHeadless,FirefoxHeadless",
