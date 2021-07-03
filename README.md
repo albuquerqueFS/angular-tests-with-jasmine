@@ -1,5 +1,3 @@
-# Hey hey hey
-
 ## Nomenclatura de arquivos
 
 Sempre criar o arquivo teste com o mesmo nome do arquivo alvo, adicionando o prefixo 'spec'.
@@ -65,3 +63,23 @@ Exemplo: "test-common": "ng test --browsers Chrome,Firefox",
 ### Para rodar no modo headless
 
 "test-ci": "ng test --browsers ChromeHeadless,FirefoxHeadless",
+
+## Gerando relatório de testes consumíveis por servidores de integração contínua.
+
+```sh
+npm i -D karma-junit-reporter
+```
+
+Adicione a biblioteca ao array de plugins em karma.conf.
+
+No script de inicialização dos testes, adicione a flag: --reports junit
+
+Na próxima vez que os testes forem lançados, será gerado na pasta root os relatórios em xml
+
+## Configurando o code coverage
+
+Exemplo de script:
+
+```sh
+"test-coverage": "ng test --watch=false --sourceMap=true --codeCoverage=true --browsers ChromeHeadless",
+```
