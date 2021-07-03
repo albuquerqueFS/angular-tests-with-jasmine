@@ -22,7 +22,7 @@ beforeEach(async () => {
 });
 ```
 
-### Se o módulo já existir se faz necessário apenas fazer o import do módulo
+### Se o módulo já existir se faz necessário apenas o import do módulo
 
 ```javascript
 beforeEach(async () => {
