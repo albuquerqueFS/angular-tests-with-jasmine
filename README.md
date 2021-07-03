@@ -34,19 +34,30 @@ beforeEach(async () => {
 });
 ```
 
-## Testando Output properties utilizando o subscribe
+## Testando asserções assíncronas utilizando spyOn
 
-O teste de propriedades do tipo output podem ser feitas através do método subscribe da classe.
+O teste de observables podem ser feitas utilizando os spy's do Jasmine.
 
 ```javascript
 it(`#${LikeWidgetComponent.prototype.like.name}
-  should trigger emission when called`, (done) => {
+should trigger emission when called`, (done) => {
+  spyOn(component.liked, "emit");
   fixture.detectChanges();
-  component.liked.subscribe(() => {
-    done();
-  });
   component.like();
+  expect(component.liked.emit).toHaveBeenCalled();
 });
 ```
 
-No código acima fazemos a inscrição da observable de liked, que após ser emitido, deve executar a chamada do parâmetro 'done()' para sinalizar ao jasmine que o teste foi executado com sucesso. Após alguns segundos, caso a chamada de 'done()' não seja feita, o teste falhará.
+O código acima é um simples exemplo do funcionamento do método spyOn().
+
+## Adicionar multiplos navegadores a suíte de testes
+
+```sh
+npm i -D karma-nomenavegador-launcher
+```
+
+Adicione a dependência instalada ao array de plugins em karma.conf
+
+Em package.json crie um comando separado com o objetivo de realizar os testes em diversos navegadores.
+
+Exemplo: "test-common": "ng test --browsers Chrome,Firefox",
