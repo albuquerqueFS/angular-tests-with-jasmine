@@ -83,3 +83,51 @@ Exemplo de script:
 ```sh
 "test-coverage": "ng test --watch=false --sourceMap=true --codeCoverage=true --browsers ChromeHeadless",
 ```
+
+O jasmine gera uma dashboard com todas as informações sobre o coverage, o html pode ser encontrado na pasta coverage.
+
+## Testando funções com debounce
+
+Tendo em mente um botão que utiliza um debounce de 300 milésimos para limitar os cliques, como fazemos para testar quantas vezes esse botão foi clicado?
+
+Para isso existe o fakeAsync, uma função que quando passada ao método 'it' nos permite controlar o tempo dentro do teste.
+
+```javascript
+it("description", fakeAsync(() => {
+  tick(200);
+}));
+```
+
+exemplos no arquivo 'photo-frame.component.spec.ts'
+
+## Testes de integração com o DOM
+
+```js
+it("Should display number of likes when (@Input likes) is incremented", () => {
+  fixture.detectChanges();
+  component.likes++;
+  fixture.detectChanges();
+  const element = fixture.nativeElement.querySelector(".like-counter");
+  expect(element.textContent.trim()).toBe("1");
+});
+```
+
+## Testando atributos de acessibilidade
+
+```js
+it("Should update aria-label when (@Output likes) is incremented", () => {
+  fixture.detectChanges();
+  component.likes++;
+  fixture.detectChanges();
+  const ariavalue: HTMLElement = fixture.nativeElement.querySelector("span");
+  expect(ariavalue.getAttribute("aria-label")).toBe("1: people liked");
+});
+```
+
+## Boas práticas
+
+### Marcar testes de integração do DOM com um '(D)' na descrição do teste
+
+```js
+it("(D) Should update aria-label when (@Output likes) is incremented", () => {});
+```
